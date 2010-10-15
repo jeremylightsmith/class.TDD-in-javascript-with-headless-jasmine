@@ -1,0 +1,42 @@
+<html>
+<head>
+    <title>TDD w/ Javascript</title>
+    <link href="Styles/Site.css" media="screen" rel="stylesheet" type="text/css" /> 
+	<script type="text/javascript" src="Scripts/jquery-1.4.1.js"></script> 
+	<script type="text/javascript" src="Scripts/Validator.js"></script> 
+</head>
+<body>
+    <form>
+        <div>
+            <label>Name</label>
+            <input type="text" name="artist[name]" id="artist_name" validator="isPresent"/>
+        </div>
+        <div>
+            <label>Birthday</label>
+            <input type="text" name="artist[birthday]" id="artist_birthday" validator="isValidDate"/>
+        </div>
+        <div>
+            <label>Genre</label>
+            <select name="artist[genre]" id="artist_genre">
+                <option>Rock</option>
+                <option>Classical</option>
+                <option>Metal</option>
+            </select>
+        </div>
+        <div>
+            <label>Description</label>
+            <textarea name="artist[description]" id="artist_description" cols="30" rows="5"></textarea>
+        </div>
+        <div>
+            <input type="submit" value="Save" />
+        </div>
+    </form>
+
+    <script type="text/javascript">
+        Validator.attachToNodes();
+        $('form').submit(function () {
+            return Validator.isFormValid();
+        });
+    </script>
+</body>
+</html>

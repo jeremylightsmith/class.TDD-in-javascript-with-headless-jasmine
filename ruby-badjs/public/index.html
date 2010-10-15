@@ -1,0 +1,62 @@
+<html>
+<head>
+  <title>TDD w/ Javascript</title>
+  <style type="text/css" media="screen">
+    .error {
+    	background-color: #f99;
+    }
+  </style>
+  <script src="js/jquery-1.4.2.js" type="text/javascript"></script> 
+</head>
+<body>
+  <form action="submitted.html">
+    <div>
+      <label>Name</label>
+      <input type="text" name="artist[name]" id="artist_name"/>
+    </div>
+    <div>
+      <label>Birthday</label>
+      <input type="text" name="artist[birthday]" id="artist_birthday"/>
+    </div>
+    <div>
+      <label>Genre</label>
+      <select name="artist[genre]" id="artist_genre">
+        <option>Rock</option>
+        <option>Classical</option>
+        <option>Metal</option>
+      </select>
+    </div>
+    <div>
+      <label>Description</label>
+      <textarea name="artist[description]" id="artist_description" cols="30" rows="5"></textarea>
+    </div>
+    <div>
+      <input type="submit" value="Save" />
+    </div>
+  </form>
+
+  <script type="text/javascript">
+    $(function() {
+      $('form').submit(function () {
+        var valid = true;
+      
+        if ($('#artist_name').val().length > 0) {
+          $('#artist_name').removeClass('error');
+        } else {
+          $('#artist_name').addClass('error');
+          valid = false;
+        }
+        
+        if ($('#artist_birthday').val().match(/^\d\d?\/\d\d?\/\d\d\d\d$/) != null) {
+          $('#artist_birthday').removeClass('error');
+        } else {
+          $('#artist_birthday').addClass('error');
+          valid = false;
+        }
+
+        return valid;
+      });
+    });
+  </script>
+</body>
+</html>

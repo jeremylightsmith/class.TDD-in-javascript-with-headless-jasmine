@@ -1,0 +1,47 @@
+# to install jazz money
+#  gem install stackdeck
+#  gem install johnson -v "2.0.0.pre3"
+#  gem install harmony
+#  gem install jazz_money
+#
+# for the textmate bundle
+#  cd ~/Library/Application\ Support/Textmate/Bundles
+#  git clone git://github.com/jeremylightsmith/jasmine-tmbundle.git jasmine.tmbundle
+#
+def silence_warnings
+  saved_verbosity = $-v
+  $-v = nil
+  yield
+ensure
+  $-v = saved_verbosity
+end
+
+task "spec:js" do
+  require 'rubygems'
+  require 'jazz_money'
+  
+  class JazzMoney::JasmineRunner
+    def load_jasmine
+      @page.load(File.join(JAZZ_MONEY_DIR, "jasmine/lib/consolex.js"))
+      @page.load(File.expand_path(File.dirname(__FILE__) + "/vendor/jasmine/jasmine.js"))
+    end
+  end
+
+  javascript_files = FileList[
+    "public/js/jquery-1.4.2.js",
+    "public/js/validator.js",
+
+    "spec/spec_helper.js"
+  ]
+
+  jasmine_spec_files = FileList["spec/**/*_spec.js"]
+  jasmine_spec_files = ENV["FILE"] if ENV["FILE"]
+
+  silence_warnings do
+    old_argv, ARGV = ARGV, []
+    JazzMoney::Runner.new(javascript_files, jasmine_spec_files).call
+    ARGV = old_argv
+  end
+end
+
+task :default => "spec:js"
