@@ -11,13 +11,13 @@ In ruby:
 * **ruby-testedjs** - the finished product
 
 Here we're using jazz money, the short on that is :
-  var jasmine = JsBdd;
-  var traceMonkey = Mozilla.JsEngine;
-  var johnson = Ruby + TraceMonkey;
-  var envJs = JsBrowser;
-  var harmony = johnson + envJs;
 
-  var jazzMoney = jasmine + harmony;
+    var jasmine = JsBdd;
+    var traceMonkey = Mozilla.JsEngine;
+    var johnson = Ruby + TraceMonkey;
+    var envJs = JsBrowser;
+    var harmony = johnson + envJs;
+    var jazzMoney = jasmine + harmony;
 
 ----
 
